@@ -12,7 +12,7 @@ export async function GET() {
     nhtsaVpic: () => fetchJson("https://vpic.nhtsa.dot.gov/api/vehicles/GetMakesForVehicleType/car?format=json", { source: "vPIC", revalidate: 0 }),
     eia: async () => {
       if (!process.env.EIA_API_KEY) throw new Error("EIA_API_KEY not set (using national fallback prices)");
-      return fetchJson(`https://api.eia.gov/v2/petroleum/pri/gnd/?api_key=${process.env.EIA_API_KEY}`, { source: "EIA", revalidate: 0 });
+      return fetchJson("https://api.eia.gov/v2/petroleum/pri/gnd/", { source: "EIA", revalidate: 0, headers: { "X-Api-Key": process.env.EIA_API_KEY } });
     },
   };
   const entries = await Promise.all(

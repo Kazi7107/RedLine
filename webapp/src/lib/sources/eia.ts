@@ -1,6 +1,7 @@
 /**
  * U.S. Energy Information Administration Open Data API v2.
  * Requires a free key in EIA_API_KEY: https://www.eia.gov/opendata/register.php
+ * The key is sent in the X-Api-Key header (EIA accepts this), never in the URL.
  * Used for Washington State weekly retail fuel prices and monthly residential
  * electricity prices. Falls back to FuelEconomy.gov national averages.
  */
@@ -20,10 +21,10 @@ const PRODUCTS = { regular: "EPMR", midgrade: "EPMM", premium: "EPMP", diesel: "
 
 async function latestGasPrice(apiKey: string, duoarea: string, product: string) {
   const url =
-    `${BASE}/petroleum/pri/gnd/data/?api_key=${apiKey}&frequency=weekly&data[0]=value` +
+    `${BASE}/petroleum/pri/gnd/data/?frequency=weekly&data[0]=value` +
     `&facets[duoarea][]=${duoarea}&facets[product][]=${product}` +
     `&sort[0][column]=period&sort[0][direction]=desc&length=1`;
-  const d = await fetchJson<EiaResponse>(url, { source: SOURCE, revalidate: 60 * 60 * 12 });
+  const d = await fetchJson<EiaResponse>(url, { source: SOURCE, revalidate: 60 * 60 * 12, headers: { "X-Api-Key": apiKey } });
   const row = d.response?.data?.[0];
   const v = Number(row?.value);
   if (!row || !Number.isFinite(v) || v <= 0) throw new Error(`EIA: no data for ${duoarea}/${product}`);
@@ -32,10 +33,10 @@ async function latestGasPrice(apiKey: string, duoarea: string, product: string) 
 
 async function latestElectricityPrice(apiKey: string, state: string) {
   const url =
-    `${BASE}/electricity/retail-sales/data/?api_key=${apiKey}&frequency=monthly&data[0]=price` +
+    `${BASE}/electricity/retail-sales/data/?frequency=monthly&data[0]=price` +
     `&facets[stateid][]=${state}&facets[sectorid][]=RES` +
     `&sort[0][column]=period&sort[0][direction]=desc&length=1`;
-  const d = await fetchJson<EiaResponse>(url, { source: SOURCE, revalidate: 60 * 60 * 24 });
+  const d = await fetchJson<EiaResponse>(url, { source: SOURCE, revalidate: 60 * 60 * 24, headers: { "X-Api-Key": apiKey } });
   const cents = Number(d.response?.data?.[0]?.price);
   if (!Number.isFinite(cents) || cents <= 0) throw new Error(`EIA: no electricity price for ${state}`);
   return cents / 100;
