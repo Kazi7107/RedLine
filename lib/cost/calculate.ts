@@ -24,6 +24,8 @@ export const RULES = {
   repairLowFactor: 0.65,
   repairHighFactor: 1.55,
   waTitleFee: 35.5,
+  /** WA adds 0.3% sales/use tax on motor vehicles, on top of the local rate (RCW 82.08.020(3)). */
+  motorVehicleSalesTax: 0.003,
   /** WA DOL basic registration + filing + plate/service fees, roughly. */
   waBaseRegistration: 93,
   rtaRate: 0.011,
@@ -42,7 +44,8 @@ interface ClassParams {
 export const CLASS_PARAMS: Record<VehicleClass, ClassParams> = {
   compact: { depreciationRate: 0.11, insurance: [1100, 1550], repairBase: 520, tireSet: 640, brakeJob: 420, extraRegistration: 0 },
   midsize: { depreciationRate: 0.11, insurance: [1150, 1650], repairBase: 600, tireSet: 720, brakeJob: 460, extraRegistration: 0 },
-  hybrid: { depreciationRate: 0.1, insurance: [1100, 1550], repairBase: 540, tireSet: 640, brakeJob: 380, extraRegistration: 0 },
+  // extraRegistration: WA DOL $75 yearly hybrid fee.
+  hybrid: { depreciationRate: 0.1, insurance: [1100, 1550], repairBase: 540, tireSet: 640, brakeJob: 380, extraRegistration: 75 },
   "compact-suv": { depreciationRate: 0.1, insurance: [1150, 1600], repairBase: 620, tireSet: 820, brakeJob: 500, extraRegistration: 0 },
   "midsize-suv": { depreciationRate: 0.1, insurance: [1200, 1700], repairBase: 680, tireSet: 900, brakeJob: 540, extraRegistration: 0 },
   "pickup-midsize": { depreciationRate: 0.08, insurance: [1200, 1700], repairBase: 640, tireSet: 1000, brakeJob: 560, extraRegistration: 45 },
@@ -192,7 +195,7 @@ function taxes(input: CostInputs): YearRange[] {
     const age = asOfYear - facts.modelYear + y;
     let total = RULES.waBaseRegistration + extra;
     if (locale.rta) total += facts.msrp * rtaScheduleFactor(age) * RULES.rtaRate;
-    if (y === 0) total += askingPrice * locale.salesTaxRate + RULES.waTitleFee;
+    if (y === 0) total += askingPrice * (locale.salesTaxRate + RULES.motorVehicleSalesTax) + RULES.waTitleFee;
     return fixed(total);
   });
 }

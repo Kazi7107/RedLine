@@ -16,6 +16,8 @@ export interface SeedTrim {
   name: string;
   engine: string;
   mpg: number;
+  /** FuelEconomy.gov vehicle id (vehicle_trims.fueleconomy_id). The live source reads MPG from it. */
+  epaId: number;
   /** Typical listing price at typicalMileage, as of fall 2026. */
   typicalPrice: number;
   typicalMileage: number;
@@ -36,6 +38,8 @@ export interface SeedModel {
   year: number;
   make: string;
   model: string;
+  /** Model name NHTSA files recalls and complaints under, when it differs. */
+  nhtsaModel?: string;
   vehicleClass: VehicleClass;
   resale: number;
   synthetic: boolean;
@@ -74,9 +78,9 @@ export const SEED: SeedModel[] = [
     ],
     note: "Solid all-rounder. Owner complaints are mostly annoying stuff, not engine or transmission.",
     trims: [
-      { name: "LX", engine: "2.0L CVT", mpg: 34, typicalPrice: 15900, typicalMileage: 68400, msrp: 19700, common: true, vin: "19XFC2F59HE012345" },
-      { name: "EX", engine: "1.5L turbo CVT", mpg: 36, typicalPrice: 17200, typicalMileage: 62000, msrp: 22600 },
-      { name: "Sport", engine: "2.0L manual", mpg: 32, typicalPrice: 16800, typicalMileage: 60000, msrp: 21300 },
+      { name: "LX", engine: "2.0L CVT", mpg: 34, epaId: 38247, typicalPrice: 15900, typicalMileage: 68400, msrp: 19700, common: true, vin: "19XFC2F59HE012345" },
+      { name: "EX", engine: "1.5L turbo CVT", mpg: 36, epaId: 38249, typicalPrice: 17200, typicalMileage: 62000, msrp: 22600 },
+      { name: "Sport", engine: "2.0L manual", mpg: 32, epaId: 38246, typicalPrice: 16800, typicalMileage: 60000, msrp: 21300 },
     ],
   },
   {
@@ -88,9 +92,9 @@ export const SEED: SeedModel[] = [
     ],
     note: "Same strong basics as the 2017 with a few fixes. The EX's turbo engine gets the best mileage.",
     trims: [
-      { name: "LX", engine: "2.0L CVT", mpg: 34, typicalPrice: 16900, typicalMileage: 60000, msrp: 19500 },
-      { name: "EX", engine: "1.5L turbo CVT", mpg: 36, typicalPrice: 18400, typicalMileage: 55000, msrp: 22300, common: true, vin: "SHHFK7H59JU123456" },
-      { name: "Sport", engine: "2.0L CVT", mpg: 32, typicalPrice: 17900, typicalMileage: 52000, msrp: 21900 },
+      { name: "LX", engine: "2.0L CVT", mpg: 34, epaId: 39566, typicalPrice: 16900, typicalMileage: 60000, msrp: 19500 },
+      { name: "EX", engine: "1.5L turbo CVT", mpg: 36, epaId: 39568, typicalPrice: 18400, typicalMileage: 55000, msrp: 22300, common: true, vin: "SHHFK7H59JU123456" },
+      { name: "Sport", engine: "2.0L CVT", mpg: 32, epaId: 39566, typicalPrice: 17900, typicalMileage: 52000, msrp: 21900 },
     ],
   },
   {
@@ -102,9 +106,9 @@ export const SEED: SeedModel[] = [
     ],
     note: "Boring in the best way. Cheap to run and the least likely to surprise you with a big bill.",
     trims: [
-      { name: "L", engine: "1.8L 4-speed auto", mpg: 30, typicalPrice: 12900, typicalMileage: 80000, msrp: 17900 },
-      { name: "LE", engine: "1.8L CVT", mpg: 32, typicalPrice: 14200, typicalMileage: 74200, msrp: 19000, common: true, vin: "2T1BURHE5GC512345" },
-      { name: "S", engine: "1.8L CVT", mpg: 31, typicalPrice: 14800, typicalMileage: 70000, msrp: 20900 },
+      { name: "L", engine: "1.8L 4-speed auto", mpg: 30, epaId: 36799, typicalPrice: 12900, typicalMileage: 80000, msrp: 17900 },
+      { name: "LE", engine: "1.8L CVT", mpg: 32, epaId: 36801, typicalPrice: 14200, typicalMileage: 74200, msrp: 19000, common: true, vin: "2T1BURHE5GC512345" },
+      { name: "S", engine: "1.8L CVT", mpg: 31, epaId: 36800, typicalPrice: 14800, typicalMileage: 70000, msrp: 20900 },
     ],
   },
   {
@@ -132,9 +136,9 @@ export const SEED: SeedModel[] = [
     ],
     note: "Cheapest sticker, priciest to own. The automatic transmission is a known trouble spot, so repairs could run high.",
     trims: [
-      { name: "S", engine: "2.0L auto", mpg: 31, typicalPrice: 7400, typicalMileage: 90000, msrp: 17200 },
-      { name: "SE", engine: "2.0L auto", mpg: 31, typicalPrice: 8900, typicalMileage: 81500, msrp: 19400, common: true, vin: "1FADP3F28FL123456" },
-      { name: "Titanium", engine: "2.0L auto", mpg: 30, typicalPrice: 9900, typicalMileage: 76000, msrp: 23500 },
+      { name: "S", engine: "2.0L auto", mpg: 31, epaId: 35962, typicalPrice: 7400, typicalMileage: 90000, msrp: 17200 },
+      { name: "SE", engine: "2.0L auto", mpg: 31, epaId: 35962, typicalPrice: 8900, typicalMileage: 81500, msrp: 19400, common: true, vin: "1FADP3F28FL123456" },
+      { name: "Titanium", engine: "2.0L auto", mpg: 30, epaId: 35962, typicalPrice: 9900, typicalMileage: 76000, msrp: 23500 },
     ],
   },
   {
@@ -147,9 +151,9 @@ export const SEED: SeedModel[] = [
     ],
     note: "Roomy, comfortable and very dependable. Costs a bit more to insure than a compact.",
     trims: [
-      { name: "LE", engine: "2.5L 8-speed auto", mpg: 32, typicalPrice: 20500, typicalMileage: 58000, msrp: 24900, common: true, vin: "4T1B11HK5JU123456" },
-      { name: "SE", engine: "2.5L 8-speed auto", mpg: 32, typicalPrice: 21500, typicalMileage: 56000, msrp: 26200 },
-      { name: "XLE", engine: "2.5L 8-speed auto", mpg: 31, typicalPrice: 23500, typicalMileage: 52000, msrp: 29600 },
+      { name: "LE", engine: "2.5L 8-speed auto", mpg: 32, epaId: 38883, typicalPrice: 20500, typicalMileage: 58000, msrp: 24900, common: true, vin: "4T1B11HK5JU123456" },
+      { name: "SE", engine: "2.5L 8-speed auto", mpg: 32, epaId: 38883, typicalPrice: 21500, typicalMileage: 56000, msrp: 26200 },
+      { name: "XLE", engine: "2.5L 8-speed auto", mpg: 31, epaId: 38884, typicalPrice: 23500, typicalMileage: 52000, msrp: 29600 },
     ],
   },
   {
@@ -162,9 +166,9 @@ export const SEED: SeedModel[] = [
     ],
     note: "A big, reliable sedan for compact money. Gas is the largest cost here.",
     trims: [
-      { name: "LX", engine: "2.4L CVT", mpg: 30, typicalPrice: 16500, typicalMileage: 74000, msrp: 22500 },
-      { name: "Sport", engine: "2.4L CVT", mpg: 29, typicalPrice: 17400, typicalMileage: 71000, msrp: 24400, common: true },
-      { name: "EX-L", engine: "2.4L CVT", mpg: 30, typicalPrice: 18500, typicalMileage: 68000, msrp: 28700 },
+      { name: "LX", engine: "2.4L CVT", mpg: 30, epaId: 37625, typicalPrice: 16500, typicalMileage: 74000, msrp: 22500 },
+      { name: "Sport", engine: "2.4L CVT", mpg: 29, epaId: 37626, typicalPrice: 17400, typicalMileage: 71000, msrp: 24400, common: true },
+      { name: "EX-L", engine: "2.4L CVT", mpg: 30, epaId: 37625, typicalPrice: 18500, typicalMileage: 68000, msrp: 28700 },
     ],
   },
   {
@@ -179,9 +183,9 @@ export const SEED: SeedModel[] = [
     ],
     note: "Holds value well and hauls anything, but gas and tires cost a lot more than a car.",
     trims: [
-      { name: "XL", engine: "3.5L V6 6-speed", mpg: 20, typicalPrice: 18500, typicalMileage: 105000, msrp: 27500 },
-      { name: "XLT", engine: "2.7L EcoBoost 4x4", mpg: 20, typicalPrice: 22900, typicalMileage: 98000, msrp: 38000, common: true, vin: "1FTEW1EP5FFA12345" },
-      { name: "Lariat", engine: "3.5L EcoBoost 4x4", mpg: 19, typicalPrice: 27500, typicalMileage: 92000, msrp: 46500 },
+      { name: "XL", engine: "3.5L V6 6-speed", mpg: 20, epaId: 35920, typicalPrice: 18500, typicalMileage: 105000, msrp: 27500 },
+      { name: "XLT", engine: "2.7L EcoBoost 4x4", mpg: 20, epaId: 35922, typicalPrice: 22900, typicalMileage: 98000, msrp: 38000, common: true, vin: "1FTEW1EP5FFA12345" },
+      { name: "Lariat", engine: "3.5L EcoBoost 4x4", mpg: 19, epaId: 35923, typicalPrice: 27500, typicalMileage: 92000, msrp: 46500 },
     ],
   },
   {
@@ -208,9 +212,9 @@ export const SEED: SeedModel[] = [
     ],
     note: "Feels like a lot of car for the price, but German luxury repairs cost 40 to 50% more than a Camry's.",
     trims: [
-      { name: "320i", engine: "2.0L turbo 8-speed", mpg: 27, typicalPrice: 13900, typicalMileage: 82000, msrp: 34200 },
-      { name: "328i", engine: "2.0L turbo 8-speed", mpg: 27, typicalPrice: 15500, typicalMileage: 78000, msrp: 39500, common: true },
-      { name: "340i", engine: "3.0L turbo 8-speed", mpg: 24, typicalPrice: 19900, typicalMileage: 72000, msrp: 47000 },
+      { name: "320i", engine: "2.0L turbo 8-speed", mpg: 27, epaId: 36723, typicalPrice: 13900, typicalMileage: 82000, msrp: 34200 },
+      { name: "328i", engine: "2.0L turbo 8-speed", mpg: 27, epaId: 36792, typicalPrice: 15500, typicalMileage: 78000, msrp: 39500, common: true },
+      { name: "340i", engine: "3.0L turbo 8-speed", mpg: 24, epaId: 36888, typicalPrice: 19900, typicalMileage: 72000, msrp: 47000 },
     ],
   },
   {
@@ -224,8 +228,8 @@ export const SEED: SeedModel[] = [
     risks: [HYBRID_BATTERY(0.45, 3)],
     note: "Amazing gas mileage, but at this age the hybrid battery is the big question mark.",
     trims: [
-      { name: "Two", engine: "1.8L hybrid", mpg: 50, typicalPrice: 11900, typicalMileage: 128000, msrp: 24200, common: true, vin: "JTDKN3DU5E1234567" },
-      { name: "Three", engine: "1.8L hybrid", mpg: 50, typicalPrice: 12900, typicalMileage: 121000, msrp: 26800 },
+      { name: "Two", engine: "1.8L hybrid", mpg: 50, epaId: 34489, typicalPrice: 11900, typicalMileage: 128000, msrp: 24200, common: true, vin: "JTDKN3DU5E1234567" },
+      { name: "Three", engine: "1.8L hybrid", mpg: 50, epaId: 34489, typicalPrice: 12900, typicalMileage: 121000, msrp: 26800 },
     ],
   },
   {
@@ -238,9 +242,9 @@ export const SEED: SeedModel[] = [
     risks: [HYBRID_BATTERY(0.35, 4)],
     note: "Gas is almost nothing. Budget for the chance of a hybrid battery in the next few years.",
     trims: [
-      { name: "Two", engine: "1.8L hybrid", mpg: 50, typicalPrice: 13200, typicalMileage: 112000, msrp: 24200 },
-      { name: "Three", engine: "1.8L hybrid", mpg: 50, typicalPrice: 14200, typicalMileage: 106000, msrp: 26800, common: true },
-      { name: "Four", engine: "1.8L hybrid", mpg: 48, typicalPrice: 15500, typicalMileage: 99000, msrp: 29500 },
+      { name: "Two", engine: "1.8L hybrid", mpg: 50, epaId: 35556, typicalPrice: 13200, typicalMileage: 112000, msrp: 24200 },
+      { name: "Three", engine: "1.8L hybrid", mpg: 50, epaId: 35556, typicalPrice: 14200, typicalMileage: 106000, msrp: 26800, common: true },
+      { name: "Four", engine: "1.8L hybrid", mpg: 48, epaId: 35556, typicalPrice: 15500, typicalMileage: 99000, msrp: 29500 },
     ],
   },
   {
@@ -255,7 +259,7 @@ export const SEED: SeedModel[] = [
     risks: [HYBRID_BATTERY(0.6, 2)],
     note: "Cheap and still sips gas, but it's old enough that both the battery and engine need a close look.",
     trims: [
-      { name: "Two", engine: "1.8L hybrid", mpg: 50, typicalPrice: 8400, typicalMileage: 168000, msrp: 22800, common: true },
+      { name: "Two", engine: "1.8L hybrid", mpg: 50, epaId: 26425, typicalPrice: 8400, typicalMileage: 168000, msrp: 22800, common: true },
     ],
   },
   {
@@ -267,9 +271,9 @@ export const SEED: SeedModel[] = [
     ],
     note: "Feels more expensive than it is. AWD costs a little in gas but helps over the passes.",
     trims: [
-      { name: "Sport", engine: "2.5L FWD", mpg: 28, typicalPrice: 19500, typicalMileage: 68000, msrp: 25400 },
-      { name: "Touring", engine: "2.5L AWD", mpg: 26, typicalPrice: 21400, typicalMileage: 64000, msrp: 29000, common: true, vin: "JM3KFBCM5K0123456" },
-      { name: "Grand Touring", engine: "2.5L AWD", mpg: 26, typicalPrice: 23800, typicalMileage: 58000, msrp: 32800 },
+      { name: "Sport", engine: "2.5L FWD", mpg: 28, epaId: 41041, typicalPrice: 19500, typicalMileage: 68000, msrp: 25400 },
+      { name: "Touring", engine: "2.5L AWD", mpg: 26, epaId: 41044, typicalPrice: 21400, typicalMileage: 64000, msrp: 29000, common: true, vin: "JM3KFBCM5K0123456" },
+      { name: "Grand Touring", engine: "2.5L AWD", mpg: 26, epaId: 41044, typicalPrice: 23800, typicalMileage: 58000, msrp: 32800 },
     ],
   },
   {
@@ -281,12 +285,12 @@ export const SEED: SeedModel[] = [
     ],
     note: "The safe pick for an SUV. Holds its value and rarely breaks.",
     trims: [
-      { name: "LE", engine: "2.5L AWD", mpg: 25, typicalPrice: 19900, typicalMileage: 78000, msrp: 26800 },
-      { name: "XLE", engine: "2.5L AWD", mpg: 25, typicalPrice: 21500, typicalMileage: 72000, msrp: 28800, common: true },
+      { name: "LE", engine: "2.5L AWD", mpg: 25, epaId: 39371, typicalPrice: 19900, typicalMileage: 78000, msrp: 26800 },
+      { name: "XLE", engine: "2.5L AWD", mpg: 25, epaId: 39371, typicalPrice: 21500, typicalMileage: 72000, msrp: 28800, common: true },
     ],
   },
   {
-    year: 2018, make: "Toyota", model: "RAV4 Hybrid", vehicleClass: "compact-suv", resale: 0.85, synthetic: true, unitsSold: 48000,
+    year: 2018, make: "Toyota", model: "RAV4 Hybrid", nhtsaModel: "RAV4", vehicleClass: "compact-suv", resale: 0.85, synthetic: true, unitsSold: 48000,
     complaints: { electrical: 20, brakes: 15, body: 10, "hybrid-system": 5, "ac-heat": 5, steering: 5 },
     complaintSummary: "Very few. Some brake feel complaints, which is common with hybrids.",
     recalls: [
@@ -294,8 +298,8 @@ export const SEED: SeedModel[] = [
     ],
     note: "Costs more up front than the gas RAV4, but the mileage pays some of that back.",
     trims: [
-      { name: "XLE", engine: "2.5L hybrid AWD", mpg: 32, typicalPrice: 23900, typicalMileage: 69000, msrp: 30700, common: true },
-      { name: "Limited", engine: "2.5L hybrid AWD", mpg: 32, typicalPrice: 26500, typicalMileage: 62000, msrp: 34600 },
+      { name: "XLE", engine: "2.5L hybrid AWD", mpg: 32, epaId: 39373, typicalPrice: 23900, typicalMileage: 69000, msrp: 30700, common: true },
+      { name: "Limited", engine: "2.5L hybrid AWD", mpg: 32, epaId: 39373, typicalPrice: 26500, typicalMileage: 62000, msrp: 34600 },
     ],
   },
   {
@@ -308,8 +312,8 @@ export const SEED: SeedModel[] = [
     ],
     note: "You pay a lot up front, but a Tacoma loses value slower than almost anything on the road.",
     trims: [
-      { name: "SR5", engine: "3.5L V6 4x4", mpg: 19, typicalPrice: 28500, typicalMileage: 88000, msrp: 33500, common: true },
-      { name: "TRD Off-Road", engine: "3.5L V6 4x4", mpg: 19, typicalPrice: 31500, typicalMileage: 82000, msrp: 36500 },
+      { name: "SR5", engine: "3.5L V6 4x4", mpg: 19, epaId: 37987, typicalPrice: 28500, typicalMileage: 88000, msrp: 33500, common: true },
+      { name: "TRD Off-Road", engine: "3.5L V6 4x4", mpg: 19, epaId: 37987, typicalPrice: 31500, typicalMileage: 82000, msrp: 36500 },
     ],
   },
   {
@@ -321,8 +325,8 @@ export const SEED: SeedModel[] = [
     ],
     note: "Old-school and simple. Cheaper to buy than a Tacoma, thirstier on gas.",
     trims: [
-      { name: "S", engine: "2.5L I4 2WD", mpg: 19, typicalPrice: 13500, typicalMileage: 102000, msrp: 19200 },
-      { name: "SV", engine: "4.0L V6 4x4", mpg: 17, typicalPrice: 17900, typicalMileage: 96000, msrp: 29500, common: true },
+      { name: "S", engine: "2.5L I4 2WD", mpg: 19, epaId: 36938, typicalPrice: 13500, typicalMileage: 102000, msrp: 19200 },
+      { name: "SV", engine: "4.0L V6 4x4", mpg: 17, epaId: 36920, typicalPrice: 17900, typicalMileage: 96000, msrp: 29500, common: true },
     ],
   },
   {
@@ -335,8 +339,8 @@ export const SEED: SeedModel[] = [
     ],
     note: "Huge inside and good on gas. The turbo's oil dilution is worth asking about.",
     trims: [
-      { name: "LX", engine: "2.4L AWD", mpg: 28, typicalPrice: 21000, typicalMileage: 66000, msrp: 26800 },
-      { name: "EX", engine: "1.5L turbo AWD", mpg: 29, typicalPrice: 22800, typicalMileage: 61000, msrp: 30000, common: true },
+      { name: "LX", engine: "2.4L AWD", mpg: 28, epaId: 40857, typicalPrice: 21000, typicalMileage: 66000, msrp: 26800 },
+      { name: "EX", engine: "1.5L turbo AWD", mpg: 29, epaId: 40858, typicalPrice: 22800, typicalMileage: 61000, msrp: 30000, common: true },
     ],
   },
   {
@@ -349,9 +353,9 @@ export const SEED: SeedModel[] = [
     ],
     note: "The Washington classic for a reason. AWD standard and lots of room for gear.",
     trims: [
-      { name: "2.5i", engine: "2.5L CVT AWD", mpg: 28, typicalPrice: 16900, typicalMileage: 90000, msrp: 25700 },
-      { name: "2.5i Premium", engine: "2.5L CVT AWD", mpg: 28, typicalPrice: 17900, typicalMileage: 85000, msrp: 27700, common: true },
-      { name: "3.6R Limited", engine: "3.6L CVT AWD", mpg: 22, typicalPrice: 20500, typicalMileage: 78000, msrp: 36500 },
+      { name: "2.5i", engine: "2.5L CVT AWD", mpg: 28, epaId: 37466, typicalPrice: 16900, typicalMileage: 90000, msrp: 25700 },
+      { name: "2.5i Premium", engine: "2.5L CVT AWD", mpg: 28, epaId: 37466, typicalPrice: 17900, typicalMileage: 85000, msrp: 27700, common: true },
+      { name: "3.6R Limited", engine: "3.6L CVT AWD", mpg: 22, epaId: 37435, typicalPrice: 20500, typicalMileage: 78000, msrp: 36500 },
     ],
   },
   {
@@ -363,7 +367,7 @@ export const SEED: SeedModel[] = [
     ],
     note: "Great visibility and standard AWD. Ask whether it's been burning oil.",
     trims: [
-      { name: "2.5i Premium", engine: "2.5L CVT AWD", mpg: 28, typicalPrice: 14900, typicalMileage: 92000, msrp: 25300, common: true },
+      { name: "2.5i Premium", engine: "2.5L CVT AWD", mpg: 28, epaId: 36147, typicalPrice: 14900, typicalMileage: 92000, msrp: 25300, common: true },
     ],
   },
   {
@@ -375,8 +379,8 @@ export const SEED: SeedModel[] = [
     ],
     note: "Small, tough and efficient. A popular first car around here.",
     trims: [
-      { name: "2.0i Premium", engine: "2.0L CVT AWD", mpg: 29, typicalPrice: 18200, typicalMileage: 63000, msrp: 23300, common: true },
-      { name: "2.0i Limited", engine: "2.0L CVT AWD", mpg: 29, typicalPrice: 19800, typicalMileage: 57000, msrp: 27200 },
+      { name: "2.0i Premium", engine: "2.0L CVT AWD", mpg: 29, epaId: 38695, typicalPrice: 18200, typicalMileage: 63000, msrp: 23300, common: true },
+      { name: "2.0i Limited", engine: "2.0L CVT AWD", mpg: 29, epaId: 38695, typicalPrice: 19800, typicalMileage: 57000, msrp: 27200 },
     ],
   },
   {
@@ -388,8 +392,8 @@ export const SEED: SeedModel[] = [
     ],
     note: "A lot of features for the money. Resale is weaker, so it loses value a bit faster.",
     trims: [
-      { name: "SE", engine: "2.0L auto", mpg: 33, typicalPrice: 11900, typicalMileage: 79000, msrp: 18200, common: true },
-      { name: "Value Edition", engine: "2.0L auto", mpg: 33, typicalPrice: 12800, typicalMileage: 74000, msrp: 20500 },
+      { name: "SE", engine: "2.0L auto", mpg: 33, epaId: 37226, typicalPrice: 11900, typicalMileage: 79000, msrp: 18200, common: true },
+      { name: "Value Edition", engine: "2.0L auto", mpg: 33, epaId: 37226, typicalPrice: 12800, typicalMileage: 74000, msrp: 20500 },
     ],
   },
   {
@@ -401,8 +405,8 @@ export const SEED: SeedModel[] = [
     ],
     note: "Fun to drive and frugal. A good alternative if Civics and Corollas feel overpriced.",
     trims: [
-      { name: "i Sport", engine: "2.0L auto", mpg: 34, typicalPrice: 11800, typicalMileage: 88000, msrp: 18600, common: true },
-      { name: "i Touring", engine: "2.0L auto", mpg: 33, typicalPrice: 12600, typicalMileage: 82000, msrp: 21500 },
+      { name: "i Sport", engine: "2.0L auto", mpg: 34, epaId: 36521, typicalPrice: 11800, typicalMileage: 88000, msrp: 18600, common: true },
+      { name: "i Touring", engine: "2.0L auto", mpg: 33, epaId: 36521, typicalPrice: 12600, typicalMileage: 82000, msrp: 21500 },
     ],
   },
   {
@@ -416,8 +420,8 @@ export const SEED: SeedModel[] = [
     ],
     note: "Comfortable on the highway. Parts and labor cost a bit more than Japanese rivals.",
     trims: [
-      { name: "S", engine: "2.0L auto", mpg: 28, typicalPrice: 7900, typicalMileage: 102000, msrp: 18200 },
-      { name: "SE", engine: "1.8L turbo auto", mpg: 30, typicalPrice: 9200, typicalMileage: 96000, msrp: 21400, common: true },
+      { name: "S", engine: "2.0L auto", mpg: 28, epaId: 35622, typicalPrice: 7900, typicalMileage: 102000, msrp: 18200 },
+      { name: "SE", engine: "1.8L turbo auto", mpg: 30, epaId: 35621, typicalPrice: 9200, typicalMileage: 96000, msrp: 21400, common: true },
     ],
   },
   {
@@ -445,8 +449,8 @@ export const SEED: SeedModel[] = [
     ],
     note: "Comfortable and cheap to buy. The 1.5L engine has a known coolant problem worth checking.",
     trims: [
-      { name: "SE", engine: "1.5L turbo FWD", mpg: 26, typicalPrice: 12500, typicalMileage: 89000, msrp: 26200, common: true },
-      { name: "Titanium", engine: "2.0L turbo AWD", mpg: 23, typicalPrice: 14900, typicalMileage: 82000, msrp: 31500 },
+      { name: "SE", engine: "1.5L turbo FWD", mpg: 26, epaId: 37358, typicalPrice: 12500, typicalMileage: 89000, msrp: 26200, common: true },
+      { name: "Titanium", engine: "2.0L turbo AWD", mpg: 23, epaId: 37362, typicalPrice: 14900, typicalMileage: 82000, msrp: 31500 },
     ],
   },
   {
@@ -459,7 +463,7 @@ export const SEED: SeedModel[] = [
     ],
     note: "Roomy and cheap to buy. Loses value faster than a Camry or Accord.",
     trims: [
-      { name: "LT", engine: "1.5L turbo auto", mpg: 30, typicalPrice: 11900, typicalMileage: 87000, msrp: 25300, common: true },
+      { name: "LT", engine: "1.5L turbo auto", mpg: 30, epaId: 37146, typicalPrice: 11900, typicalMileage: 87000, msrp: 25300, common: true },
     ],
   },
   {
@@ -472,7 +476,7 @@ export const SEED: SeedModel[] = [
     ],
     note: "Luxury for the price of a Civic, but every repair costs luxury money too.",
     trims: [
-      { name: "2.0T Premium quattro", engine: "2.0L turbo AWD", mpg: 25, typicalPrice: 11500, typicalMileage: 98000, msrp: 37300, common: true },
+      { name: "2.0T Premium quattro", engine: "2.0L turbo AWD", mpg: 25, epaId: 35090, typicalPrice: 11500, typicalMileage: 98000, msrp: 37300, common: true },
     ],
   },
   {
@@ -484,7 +488,7 @@ export const SEED: SeedModel[] = [
     ],
     note: "Practical and roomy for a small car. Check the oil level and listen for engine knock.",
     trims: [
-      { name: "+", engine: "2.0L auto", mpg: 27, typicalPrice: 10900, typicalMileage: 84000, msrp: 20000, common: true },
+      { name: "+", engine: "2.0L auto", mpg: 27, epaId: 36233, typicalPrice: 10900, typicalMileage: 84000, msrp: 20000, common: true },
     ],
   },
   {
@@ -497,7 +501,7 @@ export const SEED: SeedModel[] = [
     note: "Saturn closed in 2010, so parts and repair data are thin.",
     missing: ["repairs", "insurance"],
     trims: [
-      { name: "XR", engine: "1.8L auto", mpg: 26, typicalPrice: 4500, typicalMileage: 132000, msrp: 17500, common: true },
+      { name: "XR", engine: "1.8L auto", mpg: 26, epaId: 25510, typicalPrice: 4500, typicalMileage: 132000, msrp: 17500, common: true },
     ],
   },
 ];

@@ -87,7 +87,7 @@ export default function Methodology() {
             <section id="fuel">
               <h2>{CATEGORY_LABEL.fuel}</h2>
               <p>
-                Your yearly miles divided by the trim&apos;s combined MPG (FuelEconomy.gov), times the Washington average gas price (EIA, weekly). We assume gas goes up{" "}
+                Your yearly miles divided by the trim&apos;s combined MPG (FuelEconomy.gov), times the Washington average gas price (EIA, weekly; the U.S. average from FuelEconomy.gov if EIA is unavailable). We assume gas goes up{" "}
                 {pct(RULES.gasInflation)} a year and the engine loses about half a percent of its mileage each year.
               </p>
             </section>
@@ -130,7 +130,7 @@ export default function Methodology() {
             <section id="taxes">
               <h2>{CATEGORY_LABEL.taxes}</h2>
               <p>
-                Sales tax for your ZIP (WA DOR) on the asking price, plus the title fee, in year one. Then yearly registration (WA DOL). Inside the Sound Transit district we add
+                Sales tax for your ZIP (WA DOR) plus the state                Sales tax for your ZIP (WA DOR) on the asking price, plus the title fee, in year one. Then yearly registration (WA DOL).apos;s extra {(RULES.motorVehicleSalesTax * 100).toFixed(1)}% motor vehicle tax on the asking price, plus the title fee, in year one. Then yearly registration (WA DOL), with the $75 hybrid fee where it applies. Inside the Sound Transit district we add
                 the RTA motor vehicle excise tax, {(RULES.rtaRate * 100).toFixed(1)}% of the car&apos;s depreciated MSRP each year. That&apos;s why
                 this line says &ldquo;based on your ZIP&rdquo;.
               </p>

@@ -455,7 +455,7 @@ export function CompareApp({ catalog, initial, initialMode, initialEdit, prefill
             <span className="mono">FuelEconomy.gov</span> combined MPG for the exact trim
           </li>
           <li>
-            <span className="mono">EIA</span> weekly retail gas price, Washington average
+            <span className="mono">EIA</span> weekly retail gas price for Washington, or the U.S. average from FuelEconomy.gov when it&apos;s unavailable
           </li>
           <li>
             <span className="mono">AAA</span> Your Driving Costs, scaled for age, mileage and type of car
@@ -467,7 +467,7 @@ export function CompareApp({ catalog, initial, initialMode, initialEdit, prefill
             <span className="mono">WA DOR / DOL</span> sales tax for your ZIP and registration fees
           </li>
           <li>
-            <span className="mono">MarketCheck</span> current market value for this trim and mileage
+            <span className="mono">WA listings</span> typical price for this trim, adjusted for your mileage
           </li>
         </ol>
         <p>Ranges mean we&apos;re estimating. Your actual insurance quote and repair bills will depend on you and the car.</p>

@@ -3,8 +3,8 @@ import { CompareApp } from "@/components/compare/CompareApp";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { resolveKey } from "@/lib/catalog";
-import { getCatalog, isMockMode } from "@/lib/data";
-import { SAMPLE_VINS } from "@/lib/data/mock";
+import { getCatalog } from "@/lib/data";
+import { SAMPLE_VINS } from "@/lib/data/reference";
 import { decodeComparison } from "@/lib/share";
 
 export const metadata: Metadata = {
@@ -29,8 +29,8 @@ export default async function ComparePage({ searchParams }: { searchParams: Prom
   const editRaw = typeof params.edit === "string" ? Number(params.edit) : NaN;
   const initialEdit = Number.isInteger(editRaw) && editRaw >= 0 && editRaw < comparison.cars.length ? editRaw : undefined;
 
-  // In mock mode, offer a sample VIN so the decode animation can be tried.
-  const sampleVin = isMockMode() ? (SAMPLE_VINS.find((v) => v.startsWith("2T1")) ?? SAMPLE_VINS[0]) : undefined;
+  // A sample VIN so the decode can be tried. NHTSA vPIC decodes it in live mode too.
+  const sampleVin = SAMPLE_VINS.find((v) => v.startsWith("2T1")) ?? SAMPLE_VINS[0];
 
   return (
     <div className="app-shell">

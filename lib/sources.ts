@@ -18,7 +18,7 @@ export const SOURCES: SourceInfo[] = [
     short: "NHTSA",
     gives: "Recalls and owner complaints for each model year",
     usedFor: "Reliability score, recall list, complaint categories",
-    refresh: "Weekly",
+    refresh: "Daily",
     url: "https://www.nhtsa.gov/recalls",
   },
   {
@@ -70,7 +70,7 @@ export const SOURCES: SourceInfo[] = [
     id: "marketcheck",
     name: "MarketCheck",
     short: "MarketCheck",
-    gives: "What this trim and mileage is selling for right now",
+    gives: "What this trim and mileage is selling for. Not connected yet: typical WA listings stand in for now",
     usedFor: "Value you lose, and whether the asking price is over market",
     refresh: "Daily",
     url: "https://www.marketcheck.com",

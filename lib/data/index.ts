@@ -30,8 +30,9 @@ import type {
 
 export type * from "./types";
 
+/** Live by default. USE_MOCK_DATA=true (set for tests in vitest.config.ts) switches to the seed. */
 export function isMockMode(): boolean {
-  return process.env.USE_MOCK_DATA !== "false";
+  return process.env.USE_MOCK_DATA === "true";
 }
 
 export function dataSource(): DataSource {
@@ -202,7 +203,7 @@ export async function getEstimate(
     },
     fuel: {
       sources: [vehicle.stamp, gas.stamp],
-      method: `${req.annualMiles.toLocaleString("en-US")} miles a year at ${vehicle.facts.mpgCombined} mpg, times $${gas.value.toFixed(2)}/gal (Washington average).`,
+      method: `${req.annualMiles.toLocaleString("en-US")} miles a year at ${vehicle.facts.mpgCombined} mpg, times $${gas.value.toFixed(2)}/gal (${gas.stamp.id === "eia" ? "Washington weekly average" : "U.S. weekly average"}).`,
       note: `${vehicle.facts.mpgCombined} mpg combined`,
     },
     insurance: {
@@ -222,7 +223,7 @@ export async function getEstimate(
     },
     taxes: {
       sources: [dor, dol],
-      method: `${(locale.salesTaxRate * 100).toFixed(1)}% sales tax in ${locale.county} County, plus yearly WA registration${locale.rta ? " and the Sound Transit (RTA) excise tax" : ""}.`,
+      method: `${(locale.salesTaxRate * 100).toFixed(1)}% sales tax in ${locale.county} County plus WA's 0.3% motor vehicle tax, then yearly WA registration${locale.rta ? " and the Sound Transit (RTA) excise tax" : ""}.`,
       note: "Based on your ZIP",
     },
   };
